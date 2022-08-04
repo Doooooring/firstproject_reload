@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: 10;
+}
+
+.box {
+  font-size: 12px;
+  display: inline-block;
+  width: 90%;
+  height: 120px;
+  border-radius: 15px;
+  border-width: 2px;
+  border-style: solid;
+  box-shadow: 0 0 6px black;
+  /*box-shadow: 0px 8px 0px 2px rgba(0, 0, 0, 0.7);*/
+  margin-bottom: 25px;
+  position: relative;
+  transition: 0.3s;
+  z-index: 0;
+}
+
+.continue {
+  box-shadow: none;
+  background: linear-gradient(
+    90deg,
+    rgb(183, 239, 171) 10%,
+    rgb(104, 185, 103)
+  );
+}
+
+.continue {
+  border-width: 3px;
+  animation: blinkling 3s linear infinite;
+}
+
+@keyframes blinkling {
+  0% {
+    border-color: white;
+  }
+
+  50% {
+    border-color: green;
+  }
+  100% {
+    border-color: white;
+  }
+}
+
+.continue .subcomp {
+  color: rgb(9, 129, 53);
+  font-weight: 650;
+}
+.continue .state {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.continue .title {
+  font-size: 27px;
+  padding-left: 0px;
+  padding-right: 10px;
+  color: white;
+  text-shadow: 0px 0px 2px green;
+}
+
+.blank {
+  background: linear-gradient(90deg, rgb(113, 186, 112), rgb(11, 94, 82));
+}
+.end {
+  background-color: rgb(11, 94, 82);
+}
+
+.end .subcomp {
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 800;
+}
+
+.box:hover {
+  cursor: pointer;
+  animation: none;
+  border-color: blue;
+  /*box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.7);*/
+  transition: 0.3s;
+}
+
+.title {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+.termState {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: left;
+  padding-left: 5%;
+}
+.subtitle {
+  margin-right: 3%;
+  font-size: 15px;
+}
+
+.term {
+  font-size: 15px;
+}
+
+.state {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 20px;
+}
+.loading {
+  margin-top: 150px;
+  height: 200px;
+  width: 300px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loading {
+    animation: rotate 10s linear infinite;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1080deg);
+  }
+}
+
+.음 {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.blank .subcomp {
+  color: black;
+  font-weight: 800;
+}
+
+.blank .title {
+  font-size: 25px;
+}
+
+.clicked {
+  box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.7);
+  background: 0;
+  background-color: rgba(30, 30, 30, 0.5);
+  border-color: black;
+  animation: none;
+}
+
+.clicked .title {
+  color: black;
+  font-weight: 800;
+}
+
+.clicked .state {
+  color: black;
+  font-weight: 800;
+}
+
+.clicked .subtitle {
+  color: black;
+  font-weight: 800;
+}
+
+.clicked .term {
+  color: black;
+  font-weight: 800;
+}

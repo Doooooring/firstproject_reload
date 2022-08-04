@@ -1,0 +1,37 @@
+.default {
+  width: 85%;
+  height: 800px;
+  background-color: rgb(181, 195, 191);
+  /*background-image: url(trump.jpeg);*/
+  position: absolute;
+  left: 15%;
+  text-align: center;
+  overflow: hidden;
+  transition-duration: 2s;
+}
+
+.defaultComment {
+  color: black;
+  font-size: 50px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.minjae {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  filter: grayscale(1);
+  transition-duration: 2s;
+}
+
+.minjae:hover {
+  filter: none;
+}
+
+.minjae:hover + .default {
+  background-color: black;
+}

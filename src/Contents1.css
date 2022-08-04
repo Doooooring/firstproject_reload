@@ -1,0 +1,129 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.c1title1 {
+  text-align: left;
+  padding-left: 45px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+.default1 {
+  width: 85%;
+  height: 800px;
+  background-color: rgb(181, 195, 191);
+  position: absolute;
+  left: 15%;
+}
+
+.c1box1 {
+  background-color: rgb(106, 141, 116);
+  width: 45%;
+  border-radius: 25px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: green;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 25px;
+  padding-top: 10px;
+  height: 90%;
+}
+
+.c1subbox1 {
+  width: 90%;
+  height: 400px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(130, 184, 148);
+  border-radius: 15px;
+  margin-left: 5%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  background-color: rgb(207, 211, 206);
+  transition-duration: 0.7s;
+  overflow: hidden;
+}
+
+.c1subbox2 {
+  border-style: dashed;
+  border-width: 0px;
+  border-top-width: 2.5px;
+  border-color: rgba(33, 167, 33, 0.744);
+  padding-top: 10px;
+  height: 43%;
+  overflow: scroll;
+  position: relative;
+}
+
+.c1box2 {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(181, 195, 191);
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+.hotLoading {
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  background-color: black;
+  padding-top: 12%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.keycircle {
+  margin: 5px;
+  display: inline-block;
+
+  position: relative;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 4px;
+  transition-duration: 2s;
+}
+
+.keyName {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(14, 51, 37);
+}
+
+.keyName > b {
+  color: black;
+}
+
+.keycircle:hover {
+  border-color: blue;
+  cursor: pointer;
+}
+
+.invisible {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.visible {
+}
+
+.visible .keyName {
+  color: rgb(10, 23, 12);
+}
+
+.explaintext {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 180%;
+  font-weight: 900;
+  color: rgb(7, 54, 28);
+}

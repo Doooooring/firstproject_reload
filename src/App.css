@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  color: white;
+  border-width: 3px;
+  border-color: rgba(200, 200, 200, 0.5);
+}
+
+.App {
+  width: 100%;
+  position: relative;
+}
