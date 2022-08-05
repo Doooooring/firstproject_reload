@@ -32,6 +32,19 @@
   margin-top: 25px;
   padding-top: 10px;
   height: 90%;
+  position: relative;
+  animation: sliding 0.7s linear 1;
+}
+
+@keyframes sliding {
+  from {
+    top: 30px;
+    opacity: 0.5;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 .c1subbox1 {

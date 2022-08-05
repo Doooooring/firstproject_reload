@@ -31,7 +31,9 @@ li {
   margin-left: 3%;
   margin-right: 3%;
   height: 97%;
+  position: relative;
   overflow: scroll;
+  animation: box-sliding 1s linear 1;
 }
 
 .box2 {
@@ -41,4 +43,15 @@ li {
   position: absolute;
   right: 0px;
   top: 0px;
+}
+
+@keyframes box-sliding {
+  from {
+    bottom: -30px;
+    opacity: 0.5;
+  }
+  to {
+    bottom: 0px;
+    opacity: 1;
+  }
 }
