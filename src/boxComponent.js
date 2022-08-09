@@ -53,14 +53,22 @@ export default function BoxRendering(props) {
         showNewsContent(id)
       }}
     >
-      <h1 className={'title ' + (vacant !== id && 'subcomp')}>{title}</h1>
-      <div className="termState">
-        <span className={'subtitle ' + (vacant !== id && 'subcomp')}>
-          {subtitle}
-        </span>
-        <span className={'term ' + (vacant !== id && 'subcomp')}>{term}</span>
+      <div className="back">
+        <h1 className={'title ' + (vacant !== id && 'subcomp')}>{title}</h1>
+        <div className="termState">
+          <span className={'subtitle ' + (vacant !== id && 'subcomp')}>
+            {subtitle}
+          </span>
+          <span className={'term ' + (vacant !== id && 'subcomp')}>{term}</span>
+        </div>
+        <h3 className={'state ' + (vacant !== id && 'subcomp')}>{state}</h3>
       </div>
-      <h3 className={'state ' + (vacant !== id && 'subcomp')}>{state}</h3>
+      <div
+        className={'front '.concat(back)}
+        style={{ display: vacant === id ? 'none' : 'block' }}
+      >
+        {title}
+      </div>
     </div>
   )
 }
