@@ -6,6 +6,10 @@ import Box2Content from './Box2Content.js'
 import axios from 'axios'
 import './Contents2.css'
 
+function scroll(reference) {
+  console.log(reference.current.pageYOffset)
+}
+
 export default function Contents2(props) {
   let contentData = []
   const [orginalItems, changeOriginalItems] = useState([])
@@ -19,7 +23,7 @@ export default function Contents2(props) {
   const [newsContentLoading, setNewsContentLoading] = useState(false)
   const [box2Contents, setBox2Contents] = useState('')
   const currentContentsNumber = useRef(0)
-
+  const box1 = useRef()
   async function getContentData() {
     try {
       setItemLoading(true)
@@ -42,7 +46,13 @@ export default function Contents2(props) {
 
   return (
     <div className="default1">
-      <div className="box1">
+      <div
+        className="box1"
+        ref={box1}
+        onScroll={() => {
+          scroll(box1)
+        }}
+      >
         <SearchBox
           relatedWords={relatedWords}
           searchKeyWord={searchKeyWord}

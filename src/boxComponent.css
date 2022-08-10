@@ -17,7 +17,8 @@
   /*box-shadow: 0px 8px 0px 2px rgba(0, 0, 0, 0.7);*/
   margin-bottom: 25px;
   position: relative;
-  transition: 0.3s;
+  transition: 1s;
+  overflow: hidden;
   z-index: 0;
 }
 
@@ -53,7 +54,7 @@
   font-weight: 650;
 }
 .continue .state {
-  color: white;
+  color: rgb(11, 94, 82);
   font-size: 20px;
   font-weight: 600;
 }
@@ -62,7 +63,7 @@
   font-size: 27px;
   padding-left: 0px;
   padding-right: 10px;
-  color: white;
+  color: rgb(11, 94, 82);
   text-shadow: 0px 0px 2px green;
 }
 
@@ -82,7 +83,7 @@
   cursor: pointer;
   animation: none;
   /*box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.7);*/
-  transition: 0.3s;
+  transition: 1s;
 }
 
 .title {
@@ -188,7 +189,8 @@
   font-size: 20px;
   opacity: 1;
   z-index: 1;
-  transition-duration: 1s;
+  transition-duration: 0.7s;
+  transition-delay: 0.1s;
 }
 
 .front:hover {

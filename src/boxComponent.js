@@ -65,7 +65,12 @@ export default function BoxRendering(props) {
       </div>
       <div
         className={'front '.concat(back)}
-        style={{ display: vacant === id ? 'none' : 'block' }}
+        style={{
+          display: vacant === id ? 'none' : 'block',
+          color: 'white',
+          fontSize: '25px',
+          fontWeight: '700',
+        }}
       >
         {title}
       </div>
