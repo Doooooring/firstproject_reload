@@ -12,12 +12,14 @@ function scroll(reference) {
 
 export default function Contents2(props) {
   let contentData = []
+  const changeFilled = props.vacantfunction
+  const vacant = props.vacant
+  const ip = props.ip
   const [orginalItems, changeOriginalItems] = useState([])
   const [items, changeItems] = useState([])
   const [itemLoading, setItemLoading] = useState(false)
   const [itemError, setItemError] = useState(null)
-  const changeFilled = props.vacantfunction
-  const vacant = props.vacant
+
   const [searchKeyWord, changeKeyword] = useState('')
   const [relatedWords, getRelatedWords] = useState(['키워드를 검색해 봅시다'])
   const [newsContentLoading, setNewsContentLoading] = useState(false)
@@ -65,6 +67,7 @@ export default function Contents2(props) {
           <li key={it.title} className="contentBox">
             <BoxRendering
               item={it}
+              ip={ip}
               vacant={vacant}
               changeFilled={changeFilled}
               setNewsContentLoading={setNewsContentLoading}
@@ -79,6 +82,7 @@ export default function Contents2(props) {
           state={vacant}
           box2Contents={box2Contents}
           newsContentLoading={newsContentLoading}
+          ip={ip}
         />
       </div>
     </div>
