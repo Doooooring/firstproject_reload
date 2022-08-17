@@ -1,0 +1,89 @@
+.loading-container {
+  width: 1000px;
+  height: 800px;
+  text-align: center;
+  padding: 200px;
+  padding-top: 100px;
+  margin-left: 200px;
+}
+
+.minjaeloading {
+  margin-bottom: 70px;
+}
+
+.dataloading {
+  font-size: 30px;
+  font-weight: 800;
+  color: black;
+}
+
+.point {
+  font-size: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: black;
+  position: relative;
+}
+
+.point1 {
+  animation: jump1 2s ease-in infinite;
+}
+
+.point2 {
+  animation: jump2 2s ease-in infinite;
+}
+
+.point3 {
+  animation: jump3 2s ease-in infinite;
+}
+
+@keyframes jump1 {
+  0% {
+    top: 0px;
+  }
+  30% {
+    top: -30px;
+  }
+  60% {
+    top: 0px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes jump2 {
+  0% {
+    top: 0px;
+  }
+
+  20% {
+    top: 0px;
+  }
+  50% {
+    top: -30px;
+  }
+
+  80% {
+    top: 0%;
+  }
+  100% {
+    top: 0px;
+  }
+}
+@keyframes jump3 {
+  0% {
+    top: 0px;
+  }
+
+  40% {
+    top: 0px;
+  }
+  70% {
+    top: -30px;
+  }
+
+  100% {
+    top: 0px;
+  }
+}
