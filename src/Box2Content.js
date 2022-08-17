@@ -24,6 +24,15 @@ export default function Box2Content({
   const [rightVoted, handleRightVoted] = useState(1)
   const [totalRateOfVoted, handleTotalRateOfVoted] = useState(50)
 
+  const pressColor = {
+    조선: 'rgb(193, 54, 50)',
+    중앙: 'rgb(226, 71, 40)',
+    동아: 'rgb(56, 126, 128)',
+    한겨례: 'rgb(61, 141, 136)',
+    한경: 'rgb(18, 41, 123)',
+    매경: 'rgb(226, 122, 47)',
+  }
+
   async function sendHaveVoted(part) {
     if (leftBoxDisabled) {
       if (haveThinked) {
@@ -36,27 +45,28 @@ export default function Box2Content({
     const jsonToSend = { ip: ip, part: part, boxNumber: state }
     setCheckLeftRightLoading(true)
     try {
-      const response = await axios.post(
-        `http://localhost:3000/addVotingIp`,
-        JSON.stringify(jsonToSend),
-        {
+      const response = await axios
+        .post(`http://localhost:3000/addVotingIp`, JSON.stringify(jsonToSend), {
           headers: { 'Content-Type': 'application/json' },
-        },
-      )
-      if (response.data === true) {
-        console.log('여기임')
-        setThinkBoxDisabled(true)
-        setLeftBoxDisabled(true)
-        handleCheckLeftRight(part)
-        if (part === 'left') {
-          handleLeftVoted(leftVoted + 1)
-        } else {
-          handleRightVoted(rightVoted + 1)
-        }
-      } else {
-        console.log(response.data)
-        alert('이미 생각해서 투표 하셨잖아요?')
-      }
+        })
+        .then((response) => {
+          if (response.data === true) {
+            console.log('여기임')
+            setThinkBoxDisabled(true)
+            setLeftBoxDisabled(true)
+            handleCheckLeftRight(part)
+            if (part === 'left') {
+              handleLeftVoted((leftVoted) => leftVoted + 1)
+            } else {
+              handleRightVoted((rightVoted) => rightVoted + 1)
+            }
+
+            console.log(totalRateOfVoted)
+          } else {
+            console.log(response.data)
+            alert('이미 생각해서 투표 하셨잖아요?')
+          }
+        })
     } catch (e) {
       checkLeftRightError(e)
       console.log(e)
@@ -70,7 +80,6 @@ export default function Box2Content({
       return 0
     } else {
       try {
-        console.log('dknaflsfksnl')
         setHaveVotedLoading(true)
         await axios
           .get(`http://localhost:3000/checkIpVoted?ip=${ip}&boxNumber=${state}`)
@@ -89,7 +98,6 @@ export default function Box2Content({
             }
             handleLeftVoted(leftVoted)
             handleRightVoted(rightVoted)
-            handleTotalRateOfVoted((leftVoted / (leftVoted + rightVoted)) * 100)
           })
       } catch (e) {
         setHaveVotedError(e)
@@ -101,6 +109,10 @@ export default function Box2Content({
   useEffect(() => {
     checkHaveVoted(state)
   }, [state])
+
+  useEffect(() => {
+    handleTotalRateOfVoted((leftVoted / (leftVoted + rightVoted)) * 100)
+  }, [leftVoted, rightVoted])
 
   if (state === 'vacant') {
     return <div className="boxDefault"> 왼쪽에서 골라 보자 </div>
@@ -191,20 +203,23 @@ export default function Box2Content({
             <div
               className="gradient-block-chart"
               style={{
-                background:
-                  'linear-gradient(0deg, red ' +
-                  { totalRateOfVoted } +
-                  '%, blue)',
+                background: `linear-gradient(90deg, red ,${totalRateOfVoted}% , blue)`,
               }}
             ></div>
           </div>
           <div className="borderLine">{' - - - - - - - - - - - - - - - '}</div>
           <div className="linkBox">
-            <span className="explaintext">더 알고 싶다면 ?</span>
+            <span className="explaintext">관련 뉴스 기사</span>
             {linkList.map((link) => {
               return (
                 <a href={link[1]} target="_blank" className="linkToNews">
-                  <p>{link[0]}</p>
+                  <div
+                    className="press-name"
+                    style={{ backgroundColor: pressColor[link[2]] }}
+                  >
+                    {link[2]}
+                  </div>
+                  <span className="link-title">{link[0]}</span>
                 </a>
               )
             })}
