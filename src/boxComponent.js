@@ -8,7 +8,7 @@ export default function BoxRendering(props) {
   const setNewsContentLoading = props.setNewsContentLoading
   const setItemError = props.setItemError
   const setBox2Contents = props.setBox2Contents
-  const { id, title, subtitle, term, state, key } = item
+  const { id, title, subtitle, termStart, termEnd, state, key } = item
   let back
   function open(boxNum) {
     if (vacant === boxNum) {
@@ -59,7 +59,9 @@ export default function BoxRendering(props) {
           <span className={'subtitle ' + (vacant !== id && 'subcomp')}>
             {subtitle}
           </span>
-          <span className={'term ' + (vacant !== id && 'subcomp')}>{term}</span>
+          <span
+            className={'term ' + (vacant !== id && 'subcomp')}
+          >{`${termStart} ~ ${termEnd}`}</span>
         </div>
         <h3 className={'state ' + (vacant !== id && 'subcomp')}>{state}</h3>
       </div>
