@@ -108,13 +108,10 @@ export default function SearchBox(props) {
     if (curFocusOnWord != -1) {
       await changeKeyword(relatedWords[curFocusOnWord])
     }
-    const response = await fetch(
+    const response = await axios.get(
       `http://localhost:3000/keybox/${searchKeyWord}`,
-      {
-        method: 'GET',
-      },
     )
-    const newsList = await response.json()
+    const newsList = response.data
     if (newsList.length !== 0) {
       changeItems(newsList)
     } else {
@@ -123,11 +120,10 @@ export default function SearchBox(props) {
   }
   return (
     <form className="top" onSubmit={submit}>
-      <span className="titlepar">👍 이 정도는 알자</span>
       <div className="searchBox">
         <input
           type="text"
-          placeholder=" 키워드 입력"
+          placeholder="궁금한 뉴스의 키워드, 인물을 검색하시오"
           className="inputBox"
           value={searchKeyWord}
           onChange={(e) => {

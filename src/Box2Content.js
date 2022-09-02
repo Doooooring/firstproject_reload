@@ -8,6 +8,7 @@ export default function Box2Content({
   box2Contents,
   newsContentLoading,
   ip,
+  contentState,
 }) {
   const [haveVoted, handleHaveVoted] = useState(false)
   const [haveVotedLoading, setHaveVotedLoading] = useState(false)
@@ -38,7 +39,11 @@ export default function Box2Content({
       if (haveThinked) {
         alert('투표 결과를 바꿀 순 없어요!')
       } else {
-        alert('생각 후에 투표해 주세요!')
+        if (contentState === '진행 중') {
+          alert('생각 후에 투표해 주세요!')
+        } else {
+          alert('놓친 기회는 돌아오지 않아요!')
+        }
       }
       return 0
     }
@@ -121,14 +126,30 @@ export default function Box2Content({
       const { id, title, summary, A, B, linkList } = box2Contents
       return (
         <div className="newsBox">
-          <span className="newsTitle"> {'' + title + '..?'} </span>
-          <div className="newsContent">
+          <div
+            className="newsContent"
+            style={{
+              backgroundColor:
+                contentState === '진행 중'
+                  ? 'rgba(102, 170, 243, 0.1)'
+                  : 'rgba(168, 168, 168, 0.2)',
+            }}
+          >
             <div className="summary">{summary}</div>
-            <div className="have-thinked">
+            <div
+              className="have-thinked"
+              style={{ display: contentState !== '진행 중' ? 'block' : 'none' }}
+            >
+              <span className="voting-sentence">투표가 종료되었습니다.</span>
+            </div>
+            <div
+              className="have-thinked"
+              style={{ display: contentState === '진행 중' ? 'block' : 'none' }}
+            >
               <span className="voting-sentence">투표하기 전에 생각했나요?</span>
               <input
                 type="checkbox"
-                className="check-box"
+                className="think-box"
                 id="yes"
                 checked={haveThinked === true}
                 disabled={thinkBoxDisabled}
@@ -143,11 +164,11 @@ export default function Box2Content({
                   alert('투표 결과는 바꿀 수 없으니, 신중히 선택해 주세요!')
                   setLeftBoxDisabled(null)
                 }}
-              ></label>{' '}
+              ></label>
               예
               <input
                 type="checkbox"
-                className="check-box"
+                className="think-box"
                 id="no"
                 checked={haveThinked === false}
                 disabled={thinkBoxDisabled}
@@ -162,52 +183,60 @@ export default function Box2Content({
                   handleHaveThinked(false)
                   setLeftBoxDisabled('disabled')
                 }}
-              ></label>{' '}
+              ></label>
               아니요 <br></br>
             </div>
-            <div className="left-right">
-              <span className="left">
-                <input
-                  type="checkbox"
-                  className="check-box"
-                  id="left"
-                  checked={checkLeftRight === 'left'}
-                  disabled={leftBoxDisabled}
-                ></input>
-                <label
-                  for="left"
-                  onClick={() => {
-                    sendHaveVoted('left')
-                  }}
-                ></label>
-                {A}
-              </span>
-
-              <span className="right">
-                <input
-                  type="checkbox"
-                  className="check-box"
-                  id="right"
-                  checked={checkLeftRight === 'right'}
-                  disabled={leftBoxDisabled}
-                ></input>
-                {B}
-                <label
-                  for="right"
-                  onClick={() => {
-                    sendHaveVoted('right')
-                  }}
-                ></label>
-              </span>
-            </div>
             <div
-              className="gradient-block-chart"
               style={{
-                background: `linear-gradient(90deg, red ,${totalRateOfVoted}% , blue)`,
+                textAlign: 'center',
               }}
-            ></div>
+              className="left-right-box"
+            >
+              <div className="left-right">
+                <span className="left">
+                  <input
+                    type="checkbox"
+                    className="check-box"
+                    id="left"
+                    checked={checkLeftRight === 'left'}
+                    disabled={leftBoxDisabled}
+                  ></input>
+                  <label
+                    for="left"
+                    onClick={() => {
+                      sendHaveVoted('left')
+                    }}
+                  ></label>
+                  <span className="lrcomment l">{A}</span>
+                </span>
+                <span className="right">
+                  <span className="lrcomment r">{B}</span>
+                  <input
+                    type="checkbox"
+                    className="check-box"
+                    id="right"
+                    checked={checkLeftRight === 'right'}
+                    disabled={leftBoxDisabled}
+                  ></input>
+                  <label
+                    for="right"
+                    onClick={() => {
+                      sendHaveVoted('right')
+                    }}
+                  ></label>
+                </span>
+              </div>
+              <div
+                className="gradient-block-chart"
+                style={{
+                  background:
+                    contentState === '진행중' && checkLeftRight == null
+                      ? 'grey'
+                      : `linear-gradient(90deg, red ,${totalRateOfVoted}% , blue)`,
+                }}
+              ></div>
+            </div>
           </div>
-          <div className="borderLine">{' - - - - - - - - - - - - - - - '}</div>
           <div className="linkBox">
             <span className="explaintext">관련 뉴스 기사</span>
             {linkList.map((link) => {

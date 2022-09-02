@@ -1,0 +1,17 @@
+.keyword-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  width: 140px;
+  margin-bottom: 20px;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid black;
+  font-size: 25px;
+}
+
+.keyword-box:hover {
+  border-width: 3px;
+  cursor: pointer;
+}

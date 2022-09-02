@@ -6,10 +6,6 @@ import Box2Content from './Box2Content.js'
 import axios from 'axios'
 import './Contents2.css'
 
-function scroll(reference) {
-  console.log(reference.current.pageYOffset)
-}
-
 export default function Contents2(props) {
   let contentData = []
   const changeFilled = props.vacantfunction
@@ -19,26 +15,55 @@ export default function Contents2(props) {
   const [items, changeItems] = useState([])
   const [itemLoading, setItemLoading] = useState(false)
   const [itemError, setItemError] = useState(null)
-
   const [searchKeyWord, changeKeyword] = useState('')
   const [relatedWords, getRelatedWords] = useState(['키워드를 검색해 봅시다'])
   const [newsContentLoading, setNewsContentLoading] = useState(false)
   const [box2Contents, setBox2Contents] = useState('')
+  const [contentState, handleContentState] = useState('')
+  const [paginatingLoading, setPaginatingLoading] = useState(false)
+  const [paginatingError, setPaginatingError] = useState(null)
+  const [paginatingPossible, setPaginatingPossible] = useState(true)
+
   const currentContentsNumber = useRef(0)
   const box1 = useRef()
+
   async function getContentData() {
+    if (!paginatingPossible) {
+      return 0
+    }
     try {
       setItemLoading(true)
       const response = await axios.get(
         `http://localhost:3000/defaultcontentdata?curnum=${currentContentsNumber.current}`,
       )
-      const responseData = response.data
+      const [possibility, ...responseData] = response.data
+      setPaginatingPossible(possibility)
+      console.log(responseData)
       changeItems(responseData)
       changeOriginalItems(responseData)
       setItemLoading(false)
       currentContentsNumber.current += 10
     } catch (e) {
       setItemError(e)
+    }
+  }
+
+  async function scroll() {
+    if (!paginatingPossible) {
+      return 0
+    }
+    try {
+      setPaginatingLoading(true)
+      const response = await axios.get(
+        `http://localhost:3000/defaultcontentdata?curnum=${items.length}`,
+      )
+      const responseData = response.data
+      console.log(responseData)
+      setPaginatingPossible(responseData[0])
+      changeItems([...items, ...responseData.slice(1)])
+      setPaginatingLoading(false)
+    } catch (e) {
+      console.log(e)
     }
   }
 
@@ -51,8 +76,18 @@ export default function Contents2(props) {
       <div
         className="box1"
         ref={box1}
-        onScroll={() => {
-          scroll(box1)
+        onScroll={(e) => {
+          const { offsetHeight, scrollTop } = e.target
+          console.log(offsetHeight)
+          console.log(scrollTop)
+          if (
+            paginatingPossible &&
+            offsetHeight - 30 <= scrollTop &&
+            !paginatingLoading
+          ) {
+            console.log('duralsrl')
+            scroll()
+          }
         }}
       >
         <SearchBox
@@ -73,9 +108,22 @@ export default function Contents2(props) {
               setNewsContentLoading={setNewsContentLoading}
               setItemError={setItemError}
               setBox2Contents={setBox2Contents}
+              handleContentState={handleContentState}
             />
           </li>
         ))}
+        <div
+          className="last-page"
+          style={{ display: paginatingPossible ? 'none' : 'block' }}
+        >
+          더 이상 불러 올 컨텐츠가 없어요!
+        </div>
+        <div
+          className="component-loading"
+          style={{ display: paginatingLoading ? 'block' : 'none' }}
+        >
+          ㄱㄷㄱㄷㄱㄷㄱㄷㄱㄷㄱㄷㄱㄷㄱㄷㄱㄷㄱㄷㄱㄷ
+        </div>
       </div>
       <div className="box2">
         <Box2Content
@@ -83,6 +131,7 @@ export default function Contents2(props) {
           box2Contents={box2Contents}
           newsContentLoading={newsContentLoading}
           ip={ip}
+          contentState={contentState}
         />
       </div>
     </div>

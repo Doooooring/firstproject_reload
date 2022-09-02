@@ -7,7 +7,7 @@ export default function LoadingPage() {
       <img
         src={minjae}
         height="300px"
-        width="300px"
+        width="500px"
         className="minjaeloading"
       ></img>
       <br></br>

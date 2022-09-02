@@ -6,120 +6,139 @@
 }
 
 .box {
-  font-size: 12px;
-  display: inline-block;
-  width: 90%;
-  height: 120px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 95%;
+  height: 110px;
   border-radius: 15px;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
-  box-shadow: 0 0 6px black;
+  border-color: black;
+  /*box-shadow: 0 0 6px black;*/
   /*box-shadow: 0px 8px 0px 2px rgba(0, 0, 0, 0.7);*/
   margin-bottom: 25px;
   position: relative;
-  transition: 1s;
+  transition: 0.3s;
   overflow: hidden;
-  z-index: 0;
+  z-index: 1;
+}
+
+.box-component-image {
+  height: 95px;
+  width: 20%;
+  z-index: 2;
 }
 
 .continue {
   box-shadow: none;
-  background: linear-gradient(
-    90deg,
-    rgb(183, 239, 171) 10%,
-    rgb(104, 185, 103)
-  );
+  background: linear-gradient(160deg, white, 60%, rgb(145, 191, 236));
+  opacity: 0.5;
 }
 
 .continue {
-  border-width: 3px;
-  animation: blinkling 3s linear infinite;
+  border-width: 2px;
+}
+.title {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0;
+  width: 70%;
+  z-index: 2;
+  transition: 0.3s;
+}
+.subBox {
+  display: inline;
+  font-size: 25px;
+  font-weight: 350;
+  transition: 0.3s;
+  border-bottom: 0;
 }
 
+.clicked .subBox {
+  border-bottom: 2px solid black;
+}
+
+.clicked .title {
+  font-weight: 500;
+}
+
+.clicked {
+  background: 0;
+  border-color: black;
+  border-width: 3px;
+  animation: none;
+  background: none;
+}
+
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 8%;
+  font-size: 20px;
+  z-index: 0;
+}
+
+/*
 @keyframes blinkling {
   0% {
     border-color: white;
   }
 
   50% {
-    border-color: green;
+    border-color: black;
   }
   100% {
     border-color: white;
   }
 }
+*/
 
-.continue .subcomp {
-  color: rgb(9, 129, 53);
-  font-weight: 650;
-}
-.continue .state {
-  color: rgb(11, 94, 82);
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.continue .title {
-  font-size: 27px;
-  padding-left: 0px;
-  padding-right: 10px;
-  color: rgb(11, 94, 82);
-  text-shadow: 0px 0px 2px green;
-}
-
-.blank {
-  background: linear-gradient(90deg, rgb(113, 186, 112), rgb(11, 94, 82));
-}
 .end {
-  background-color: rgb(11, 94, 82);
+  background: linear-gradient(160deg, white, 60%, rgb(168, 168, 168));
+  opacity: 0.5;
 }
 
-.end .subcomp {
-  color: rgba(0, 0, 0, 0.4);
-  font-weight: 800;
+.clicked > .continue {
+  background: none;
+  opacity: 1;
+  background-color: rgb(145, 191, 236);
 }
 
-.box:hover {
+.clicked > .end {
+  background: none;
+  opacity: 1;
+  background-color: rgb(168, 168, 168);
+}
+
+.frontcontinue:hover {
   cursor: pointer;
   animation: none;
-  /*box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.7);*/
-  transition: 1s;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.7);
+  transition: 0.5s;
+  background-color: rgb(94, 147, 200);
 }
 
-.title {
-  position: absolute;
-  top: 10px;
-  left: 20px;
+.frontend:hover {
+  cursor: pointer;
+  animation: none;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.7);
+  transition: 0.5s;
+  background-color: rgb(168, 168, 168);
 }
 
-.termState {
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  text-align: left;
-  padding-left: 5%;
-}
-.subtitle {
-  margin-right: 3%;
-  font-size: 15px;
-}
-
-.term {
-  font-size: 15px;
-}
-
-.state {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  font-size: 20px;
-}
 .loading {
   margin-top: 150px;
   height: 200px;
   width: 300px;
 }
 
+/*
 @media (prefers-reduced-motion: no-preference) {
   .loading {
     animation: rotate 10s linear infinite;
@@ -135,33 +154,11 @@
   }
 }
 
-.음 {
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  font-size: 30px;
+
+.front {
+  z-index : 0;
 }
 
-.blank .subcomp {
-  color: black;
-  font-weight: 800;
-}
-
-.blank .title {
-  font-size: 25px;
-}
-
-.clicked {
-  box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.7);
-  background: 0;
-  background-color: rgba(30, 30, 30, 0.5);
-  border-color: black;
-  animation: none;
-}
-
-.clicked .title {
-  color: black;
-  font-weight: 800;
-}
 
 .clicked .state {
   color: black;
@@ -178,21 +175,15 @@
   font-weight: 800;
 }
 
-.back {
-  z-index: 0;
-}
-.front {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding-top: 10%;
-  font-size: 20px;
-  opacity: 1;
-  z-index: 1;
-  transition-duration: 1s;
-  transition-delay: 0.1s;
-}
 
-.front:hover {
+
+.box:hover > .front {
+  left: 100%;
   opacity: 0;
 }
+
+
+
+
+
+*/

@@ -14,10 +14,12 @@ function App() {
   const [vacant, changeFilled] = useState('vacant')
   const [IpLoading, setIpLoading] = useState(false)
   const [IpError, setIpError] = useState(null)
+  const [curSide, handleCurSide] = useState('')
   const vacantChangevalue = (value) => {
     changeFilled(value)
   }
   const [ip, handleIp] = useState('')
+
   const getIp = async () => {
     setIpLoading(true)
     try {
@@ -30,32 +32,46 @@ function App() {
     }
     setIpLoading(false)
   }
+
   useEffect(() => {
     getIp()
   }, [])
+
   if (IpLoading) {
     return <LoadingPage />
   } else {
     return (
-      <BrowserRouter className="App">
-        <Header />
-        <SideBar changeFilled={changeFilled} />
-        <Routes>
-          <Route exact path="/" element={<Default />} />
-          <Route path="/contents1" element={<Contents1 ip={ip} />} />
-          <Route
-            path="/contents2"
-            element={
-              <Contents2
-                ip={ip}
-                vacant={vacant}
-                vacantfunction={(e) => vacantChangevalue(e)}
-              />
-            }
+      <div
+        style={{ minHeight: '1080px', minWidth: '1440px', overflow: 'hidden' }}
+      >
+        <BrowserRouter className="App">
+          <Header handleCurSide={handleCurSide} />
+          <SideBar
+            changeFilled={changeFilled}
+            curSide={curSide}
+            handleCurSide={handleCurSide}
           />
-          <Route path="/contents3" element={<Contents3 />} />
-        </Routes>
-      </BrowserRouter>
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={<Default handleCurSide={handleCurSide} />}
+            />
+            <Route path="/contents1" element={<Contents1 ip={ip} />} />
+            <Route
+              path="/contents2"
+              element={
+                <Contents2
+                  ip={ip}
+                  vacant={vacant}
+                  vacantfunction={(e) => vacantChangevalue(e)}
+                />
+              }
+            />
+            <Route path="/contents3" element={<Contents3 />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     )
   }
 }

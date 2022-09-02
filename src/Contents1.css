@@ -13,20 +13,33 @@
 }
 
 .default1 {
-  width: 85%;
+  width: 1152px;
   height: 800px;
   background-color: rgb(181, 195, 191);
   position: absolute;
-  left: 15%;
+  left: 288px;
+}
+
+.grid-container {
+  width: 1152px;
+  margin-left: 288px;
+  padding: 20px;
+}
+
+.gridbox {
+  width: 1152px;
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.grid-title {
+  color: black;
+  margin-bottom: 20px;
 }
 
 .c1box1 {
-  background-color: rgb(106, 141, 116);
   width: 45%;
-  border-radius: 25px;
-  border-width: 2px;
-  border-style: solid;
-  border-color: green;
   margin-left: 3%;
   margin-right: 3%;
   margin-top: 25px;
@@ -52,7 +65,6 @@
   height: 400px;
   border-style: solid;
   border-width: 2px;
-  border-color: rgb(130, 184, 148);
   border-radius: 15px;
   margin-left: 5%;
   margin-right: 2%;
@@ -63,10 +75,8 @@
 }
 
 .c1subbox2 {
-  border-style: dashed;
   border-width: 0px;
   border-top-width: 2.5px;
-  border-color: rgba(33, 167, 33, 0.744);
   padding-top: 10px;
   height: 43%;
   overflow: scroll;
@@ -76,7 +86,6 @@
 .c1box2 {
   width: 50%;
   height: 100%;
-  background-color: rgb(181, 195, 191);
   position: absolute;
   right: 0px;
   top: 0px;
@@ -96,41 +105,11 @@
 .keycircle {
   margin: 5px;
   display: inline-block;
-
   position: relative;
   border-radius: 2px;
   border-style: solid;
   border-width: 4px;
   transition-duration: 2s;
-}
-
-.keyName {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgb(14, 51, 37);
-}
-
-.keyName > b {
-  color: black;
-}
-
-.keycircle:hover {
-  border-color: blue;
-  cursor: pointer;
-}
-
-.invisible {
-  display: none;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.visible {
-}
-
-.visible .keyName {
-  color: rgb(10, 23, 12);
 }
 
 .explaintext {
@@ -139,4 +118,10 @@
   font-size: 150%;
   font-weight: 900;
   color: rgb(7, 54, 28);
+}
+
+.back-to-keyword-list {
+  display: block;
+  height: 100px;
+  width: 60px;
 }
