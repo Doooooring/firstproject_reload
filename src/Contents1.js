@@ -9,11 +9,9 @@ import KeywordBoxComponent from './keywordbox.js'
 export default function Contents1(props) {
   const ip = props.ip
   const [hotKeyWordLoading, setHotKeyWordLoading] = useState(false)
+  const [hoyKeyWordError, setHotKeyWordError] = useState(null)
   const [hotKeyWordListContinue, getHotKeyWordListContinue] = useState([])
   const [hotKeyWordListEnd, getHotKeyWordListEnd] = useState([])
-  const [keysError, setError] = useState(null)
-  const [keyLoading, setLoading] = useState(false)
-  const [keyList, setKeys] = useState([])
   const [boxComponentList, setBoxComponentList] = useState([])
   const [curClicked, handleCurClicked] = useState(null)
   const [vacant, changeFilled] = useState('vacant')
@@ -23,6 +21,7 @@ export default function Contents1(props) {
   const [keywordClicked, handleKeywordClicked] = useState('none')
   const [contentState, handleContentState] = useState('')
   const [keywordExplanation, handleKeywordExplanation] = useState('')
+  const [summaryToFold, handleSummaryToFold] = useState(false)
   const boxref = useRef()
 
   async function getHotKeyWord() {
@@ -35,7 +34,7 @@ export default function Contents1(props) {
       getHotKeyWordListEnd(hotKeyWordEnd)
       setHotKeyWordLoading(false)
     } catch (e) {
-      setError(e)
+      setHotKeyWordError(e)
     }
   }
 
@@ -53,7 +52,7 @@ export default function Contents1(props) {
     if (keywordClicked == 'none') {
       return (
         <div className="grid-container">
-          <h2 className="grid-title">지금 HOT 정치 키워드</h2>
+          <span className="grid-title">지금 HOT 정치 키워드</span>
           <div className="gridbox">
             {hotKeyWordListContinue.map((comp) => (
               <KeywordBoxComponent
@@ -65,7 +64,7 @@ export default function Contents1(props) {
               />
             ))}
           </div>
-          <h2 className="grid-title">지난 키워드</h2>
+          <span className="grid-title">지난 키워드</span>
           <div className="gridbox">
             {hotKeyWordListEnd.map((comp) => (
               <KeywordBoxComponent
@@ -95,6 +94,30 @@ export default function Contents1(props) {
               <span className="keyword-explanation-title">
                 {keywordClicked}
               </span>
+              <div
+                className="keyword-explanation-main"
+                style={{ display: summaryToFold ? 'none' : 'block' }}
+              >
+                {keywordExplanation}
+              </div>
+              <div
+                className="summary-button"
+                style={{ display: summaryToFold ? 'none' : 'block' }}
+                onClick={() => {
+                  handleSummaryToFold(true)
+                }}
+              >
+                접기 ^
+              </div>
+              <div
+                className="summary-button"
+                style={{ display: summaryToFold ? 'inline-block' : 'none' }}
+                onClick={() => {
+                  handleSummaryToFold(false)
+                }}
+              >
+                열기 ^
+              </div>
             </div>
             <div className="c1subbox2">
               {boxComponentList.map((comp) => (
