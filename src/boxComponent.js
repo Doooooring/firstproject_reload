@@ -1,72 +1,103 @@
-import axios from 'axios'
-import './boxComponent.css'
+import axios from "axios";
+import "./boxComponent.css";
+import defaultImg from "./image/img_thumb@2x.png";
+import icoNew from "./image/ico_new.png";
+
+import { useCallback, useMemo } from "react";
 
 export default function BoxRendering(props) {
-  const item = props.item
-  const vacant = props.vacant
-  const changeFilled = props.changeFilled
-  const setNewsContentLoading = props.setNewsContentLoading
-  const setItemError = props.setItemError
-  const setBox2Contents = props.setBox2Contents
-  const handleContentState = props.handleContentState
-  const { id, title, subtitle, termStart, termEnd, state, key } = item
-  let back
+  const {
+    item,
+    vacant,
+    setVacant,
+    setNewsContentLoading,
+    setItemError,
+    setBox2Contents,
+    handleContentState,
+  } = props;
+  const { id, title, summary, tags, state } = item;
+  let back;
 
   function open(boxNum) {
-    if (vacant === boxNum) {
-      changeFilled('vacant')
-      handleContentState('')
-    } else if (vacant === 'vacant') {
-      changeFilled(boxNum)
-      handleContentState(state)
+    if (vacant === true) {
+      setVacant(boxNum);
+      handleContentState(state);
+    } else if (vacant === boxNum) {
+      setVacant(true);
+      handleContentState("");
     } else {
-      changeFilled(boxNum)
-      handleContentState(state)
+      setVacant(boxNum);
+      handleContentState(state);
     }
   }
 
   async function showNewsContent(id) {
     try {
-      setItemError(null)
-      setNewsContentLoading(true)
+      setItemError(null);
+      setNewsContentLoading(true);
       const response = await axios.get(
-        `http://localhost:3000/newscontent/${id}`,
-      )
-      if ('id' in response.data) {
-        console.log(response.data)
-        setBox2Contents(response.data)
-        setNewsContentLoading(false)
+        `http://localhost:3000/newscontent/${id}`
+      );
+      const newsData = response.data;
+      if ("id" in newsData) {
+        setBox2Contents(newsData);
+        setNewsContentLoading(false);
       } else {
-        console.log(response.data)
-        return 0
+        return 0;
       }
     } catch (e) {
-      setItemError(false)
+      setItemError(false);
     }
   }
-  if (state === '진행 중') {
-    back = 'continue'
+
+  if (state === "진행 중") {
+    back = "continue";
   } else {
-    back = 'end'
+    back = "end";
   }
+
+  const onErrorImg = useCallback((e) => {
+    e.target.src = defaultImg;
+  }, []);
+
   return (
     <div
-      className={'box ' + `front${back} ` + (vacant == id && ' clicked')}
+      className="box"
       onClick={() => {
-        open(id)
-        showNewsContent(id)
+        console.log("Eeee");
+        showNewsContent(id);
+        open(id);
       }}
     >
-      <div className={'back '.concat(back)}></div>
-      <img
-        src={`http://localhost:3000/${id}.png`}
-        className="box-component-image"
-      ></img>
-      <div className={'title ' + (vacant !== id && 'subcomp')}>
-        <span className="subBox">{title}</span>
+      <div className="img-comp">
+        <img
+          src={`http://localhost:3000/`}
+          alt="hmm"
+          width="100%"
+          className="box-component-image"
+          onError={(e) => onErrorImg(e)}
+        ></img>
+      </div>
+      <div className="news-box-body">
+        <div className-="news-box-head-block">
+          <h1 className="news-box-head">{title}</h1>
+          <span
+            style={{
+              display: state === "진행 중" ? "inline" : "none",
+            }}
+          >
+            <img src={icoNew} alt="hmm" height="18px" className="new-ico"></img>
+          </span>
+        </div>
+        <p className="new-box-summary">{summary}</p>
+        <div className="hashtag-box">
+          {tags?.map((tag) => {
+            return <p className="hashtag">{tag}</p>;
+          })}
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
 /* 
@@ -75,7 +106,7 @@ export default function BoxRendering(props) {
     {subtitle}
   </span>
   <h3 className={'state ' + (vacant !== id && 'subcomp')}>{state}</h3>
-</div>
+</div> 
 
 <div
 className={'front '.concat(back)}

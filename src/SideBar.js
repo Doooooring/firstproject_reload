@@ -3,7 +3,6 @@ import memo from './image/memo.png'
 import speaker from './image/speaker.png'
 import './SideBar.css'
 import { Link, NavLink } from 'react-router-dom'
-import { toBePartiallyChecked } from '@testing-library/jest-dom/dist/matchers'
 import { useRef } from 'react'
 
 function getLinkStyle({ isActive }) {

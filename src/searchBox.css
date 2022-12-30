@@ -1,21 +1,18 @@
 .top {
   display: inline-block;
-  width: 95%;
+  width: 300px;
   height: 40px;
-  font-size: 18px;
   font-weight: bold;
-  margin-bottom: 20px;
-  padding-left: 15px;
-  padding-top: 3px;
-  text-align: left;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
   position: relative;
 }
 
 .searchBox {
   position: absolute;
   top: 0px;
-  right: 70px;
-  width: 84%;
+  width: 100%;
   height: 90%;
   overflow: hidden;
 }
@@ -25,25 +22,27 @@
 }
 .inputBox {
   display: inline-block;
-  border: 2px solid rgb(151 184 214);
-  border-radius: 20px;
+  border: 0;
   width: 100%;
   height: 100%;
-  font-size: 20px;
-  color: rgb(151 184 214);
-  padding-left: 50px;
+  font-size: 15px;
+  color: rgb(170, 170, 170);
+  font-weight: 600;
+  padding-left: 40px;
   padding-top: 4px;
   padding-bottom: 3px;
-  background-image: url('./magnifier3.png');
-  background-size: 6% 80%;
+  background-image: url("image/ico_search.png");
   background-repeat: no-repeat;
-  background-position: 10px;
+  background-position: 6px 6px;
 }
 
 .inputBox::placeholder {
-  color: rgb(151 184 214);
-  font-size: 18px;
+  color: rgb(170, 170, 170);
+  font-size: 15px;
   font-weight: 800;
+}
+
+.inputBox:focus {
 }
 
 .searchBox:focus-within {
@@ -51,6 +50,7 @@
 }
 
 .searchbutton {
+  display: none;
   position: absolute;
   height: 80%;
   width: 12%;
@@ -61,19 +61,20 @@
 
 .relatedBox {
   min-height: 100px;
-  background-color: rgb(151 184 214);
+  background-color: rgb(180, 180, 180);
   width: 100%;
   border-style: solid;
   border-width: 2px;
   border-radius: 0px 0px 10px 10px;
   position: absolute;
   top: 100%;
+  text-align: left;
   z-index: 3;
   padding-top: 5px;
 }
 
 .word {
-  color: rgb(239, 247, 255);
+  color: white;
   font-weight: 700;
   padding-left: 5px;
   margin-bottom: 5px;
@@ -84,9 +85,9 @@
 }
 
 .word:hover {
-  background-color: rgb(83, 145, 204);
+  background-color: rgb(120, 120, 120);
 }
 
 .focuson {
-  background-color: rgb(83, 145, 204);
+  background-color: rgb(120, 120, 120);
 }
