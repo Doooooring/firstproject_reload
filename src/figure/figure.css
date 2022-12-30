@@ -23,3 +23,19 @@
   top: -15px;
   left: 93px;
 }
+
+.brickbar {
+  display: grid;
+  align-items: center;
+  width: 4px;
+  background-color: rgb(221, 227, 235);
+  margin-right: 20px;
+}
+
+.brick {
+  height: 3px;
+  width: 16px;
+  background-color: rgb(121, 159, 196);
+  position: relative;
+  left: -6px;
+}

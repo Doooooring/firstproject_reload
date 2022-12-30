@@ -1,23 +1,18 @@
 import "./Box2Content.css";
+import { BrickBar } from "./figure/figure.js";
 
 import loading from "./minjaeremoved.png";
 import icoClose from "./image/ico_close.png";
+import icoChosun from "./image/ico_chosun.png";
+import icoDonga from "./image/ico_donga.png";
+import icoJoongang from "./image/ico_joongang.png";
+import icoHankyung from "./image/ico_hankyung.png";
+import icoHankyoreh from "./image/ico_hankyoreh.png";
+import icoMk from "./image/ico_mk.png";
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-
-function MakeBrickBar({ num }) {
-  const iterationBlock = new Array(num - 1).fill(0);
-  return (
-    <div className="brick-bar hh">
-      <div className="corner-brick brick"></div>
-      {iterationBlock.map(() => {
-        return <div className="middle-brick brick"></div>;
-      })}
-      <div className="corner-brick brick"></div>
-    </div>
-  );
-}
 
 export default function Box2Content({
   vacant,
@@ -44,12 +39,12 @@ export default function Box2Content({
   const [totalRateOfVoted, handleTotalRateOfVoted] = useState(50);
 
   const pressColor = {
-    조선: "rgb(193, 54, 50)",
-    중앙: "rgb(226, 71, 40)",
-    동아: "rgb(56, 126, 128)",
-    한겨례: "rgb(61, 141, 136)",
-    한경: "rgb(18, 41, 123)",
-    매경: "rgb(226, 122, 47)",
+    조선: icoChosun,
+    중앙: icoJoongang,
+    동아: icoDonga,
+    한겨례: icoHankyoreh,
+    한경: icoHankyung,
+    매경: icoMk,
   };
 
   async function sendHaveVoted(part) {
@@ -154,19 +149,20 @@ export default function Box2Content({
             <div className="summary">{summary}</div>
             <div className="history-container">
               <span className="ll">관련 뉴스 기사</span>
-              <div className="history-explanation">
+              <div
+                className="history-explanation"
+                style={{
+                  height: `${box2Contents["newsHistory"][0].length * 40}px`,
+                }}
+              >
                 <br></br>
-                <div className="newshistory-date hh">
+                <div className="newshistory-date news-grid">
                   {box2Contents["newsHistory"][2].map((comp) => {
-                    if (box2Contents["newsHistory"][2][0] === comp) {
-                      return <li>{"20" + comp}</li>;
-                    } else {
-                      return <li>{comp}</li>;
-                    }
+                    return <li>{"20" + comp}</li>;
                   })}
                 </div>
-                <MakeBrickBar num={box2Contents["newsHistory"][0].length} />
-                <div className="newshistory-sentence hh">
+                <BrickBar num={box2Contents["newsHistory"][0].length} />
+                <div className="newshistory-sentence news-grid">
                   {box2Contents["newsHistory"][3].map((keynum) => {
                     const [newsSentence, newsLink] = [
                       box2Contents["newsHistory"][0][keynum],
@@ -187,15 +183,22 @@ export default function Box2Content({
               <span className="explaintext">사설 및 칼럼</span>
               {linkList.map((link) => {
                 return (
-                  <a href={link[1]} target="_blank" className="linkToNews">
-                    <div
-                      className="press-name"
-                      style={{ backgroundColor: pressColor[link[2]] }}
-                    >
-                      {link[2]}
+                  <Link
+                    to={link[1]}
+                    target="_blank"
+                    style={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    <div className="link-to-news">
+                      <img
+                        className="press-name"
+                        alt="hmm"
+                        src={pressColor[link[2]]}
+                      ></img>
+                      <p className="link-title">{link[0]}</p>
                     </div>
-                    <span className="link-title">{link[0]}</span>
-                  </a>
+                  </Link>
                 );
               })}
             </div>
@@ -298,7 +301,13 @@ export default function Box2Content({
                 </div>
               </div>
               <div className="submit-button-block">
-                <button type="submit" className="submit-button">
+                <button
+                  type="submit"
+                  className="submit-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
                   참여하기
                 </button>
               </div>
