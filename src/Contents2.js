@@ -34,7 +34,7 @@ export default function Contents2(props) {
     try {
       setItemLoading(true);
       const response = await axios.get(
-        `http://localhost:3000/defaultcontentdata?curnum=${currentContentsNumber.current}`
+        `http://localhost:3000/news/summary?curnum=${currentContentsNumber.current}`
       );
       const [possibility, ...responseData] = response.data;
       setPaginatingPossible(possibility);
@@ -55,7 +55,7 @@ export default function Contents2(props) {
     try {
       setPaginatingLoading(true);
       const response = await axios.get(
-        `http://localhost:3000/defaultcontentdata?curnum=${items.length}`
+        `http://localhost:3000/news/summary?curnum=${items.length}`
       );
       const responseData = response.data;
       setPaginatingPossible(responseData[0]);
