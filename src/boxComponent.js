@@ -11,7 +11,6 @@ export default function BoxRendering(props) {
     vacant,
     setVacant,
     setNewsContentLoading,
-    setItemError,
     setBox2Contents,
     handleContentState,
   } = props;
@@ -33,7 +32,6 @@ export default function BoxRendering(props) {
 
   async function showNewsContent(id) {
     try {
-      setItemError(null);
       setNewsContentLoading(true);
       const response = await axios.get(
         `http://localhost:3000/newscontent/${id}`
@@ -45,9 +43,7 @@ export default function BoxRendering(props) {
       } else {
         return 0;
       }
-    } catch (e) {
-      setItemError(false);
-    }
+    } catch (e) {}
   }
 
   if (state === "진행 중") {

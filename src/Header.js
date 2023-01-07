@@ -64,7 +64,7 @@ export default function Header({ setVacant }) {
           <NavLink
             to="/contents3"
             onClick={() => {
-              setVacant("vacant");
+              setVacant(true);
             }}
             style={({ isActive }) =>
               isActive

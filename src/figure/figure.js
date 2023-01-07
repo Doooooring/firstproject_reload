@@ -26,16 +26,3 @@ export function BrickBar({ num }) {
     </div>
   );
 }
-
-export function MakeBrickBar({ num }) {
-  const iterationBlock = new Array(num).fill(0);
-  return (
-    <div className="brick-bar hh">
-      <div className="corner-brick brick"></div>
-      {iterationBlock.map(() => {
-        return <div className="middle-brick brick"></div>;
-      })}
-      <div className="corner-brick brick"></div>
-    </div>
-  );
-}

@@ -224,7 +224,7 @@ export default function Contents1(props) {
       </div>
     );
   } else {
-    if (keywordClicked == "none") {
+    if (keywordClicked === "none") {
       return (
         <div>
           <input

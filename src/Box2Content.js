@@ -123,9 +123,7 @@ export default function Box2Content({
     handleTotalRateOfVoted((leftVoted / (leftVoted + rightVoted)) * 100);
   }, [leftVoted, rightVoted]);
 
-  if (vacant === true) {
-    return <div></div>;
-  } else if (newsContentLoading === false && haveVotedLoading === false) {
+  if (newsContentLoading === false && haveVotedLoading === false) {
     const { id, title, summary, A, B, newsHistory, linkList } = box2Contents;
     return (
       <div className="newsBox">
