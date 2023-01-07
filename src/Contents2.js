@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import BoxRendering from "./boxComponent";
 import SearchBox from "./searchBox";
@@ -27,7 +27,7 @@ export default function Contents2(props) {
   const currentContentsNumber = useRef(0);
   const box1 = useRef();
 
-  async function getContentData() {
+  const getContentData = useCallback(async () => {
     if (!paginatingPossible) {
       return 0;
     }
@@ -46,7 +46,7 @@ export default function Contents2(props) {
     } catch (e) {
       setItemError(e);
     }
-  }
+  }, []);
 
   async function scroll() {
     if (!paginatingPossible) {
