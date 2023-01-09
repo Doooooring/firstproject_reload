@@ -38,7 +38,7 @@ export default function Box2Content({
   const [rightVoted, handleRightVoted] = useState(1);
   const [totalRateOfVoted, handleTotalRateOfVoted] = useState(50);
 
-  const pressColor = {
+  const pressImage = {
     조선: icoChosun,
     중앙: icoJoongang,
     동아: icoDonga,
@@ -123,7 +123,9 @@ export default function Box2Content({
     handleTotalRateOfVoted((leftVoted / (leftVoted + rightVoted)) * 100);
   }, [leftVoted, rightVoted]);
 
-  if (newsContentLoading === false && haveVotedLoading === false) {
+  if (vacant === true) {
+    return <div></div>;
+  } else if (newsContentLoading === false && haveVotedLoading === false) {
     const { id, title, summary, A, B, newsHistory, linkList } = box2Contents;
     return (
       <div className="newsBox">
@@ -178,7 +180,7 @@ export default function Box2Content({
               </div>
             </div>
             <div className="linkBox">
-              <span className="explaintext">사설 및 칼럼</span>
+              <h2 className="explaintext">사설 및 칼럼</h2>
               {linkList.map((link) => {
                 return (
                   <Link
@@ -192,7 +194,7 @@ export default function Box2Content({
                       <img
                         className="press-name"
                         alt="hmm"
-                        src={pressColor[link[2]]}
+                        src={pressImage[link[2]]}
                       ></img>
                       <p className="link-title">{link[0]}</p>
                     </div>
